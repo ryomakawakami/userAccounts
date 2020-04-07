@@ -5,8 +5,6 @@ const app = express();
 
 const port = 3000;
 
-// Hello
-
 app.listen(port, () => console.log('Listening at port ' + port));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -22,5 +20,3 @@ app.get('/signup', (req, res)=>{
 app.post('/login/auth', (req, res) => {
     res.send(`User: ${req.body.username} Pass: ${req.body.password}`);
 })
-
-//This is mike shit
