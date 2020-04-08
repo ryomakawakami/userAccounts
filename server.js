@@ -27,21 +27,19 @@ app.post('/login/auth', (req, res) => {
 
 app.post('/signup/createNew', (req, res)=>{
     
-    // isValid = true;
+    isValid = true;
     
-    // if(req.body.password == req.body.confirmPassword){
-    //     readInterface = readline.createInterface({
-    //         input : fs.createReadStream('./plaintext/accounts'),
-    //         output: process.stdout,
-    //         console: false
-    //     });
+    if(req.body.password == req.body.confirmPassword){
+        readInterface = readline.createInterface({
+            input : fs.createReadStream('./plaintext/accounts'),
+            output: process.stdout,
+            console: false
+        });
 
-    //     readInterface.on('line', (line)=>{
-    //         res.send("Happy");
-    //         info = myParser.parse(line);
-    //         console.log(info);
-    //     });
-    // }
+        readInterface.on('line', (line)=>{
+            console.log(line);
+        });
+    }
     
 
 });
