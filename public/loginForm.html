@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Login page"/>
     <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/login/auth" method="POST">
-        <div>
-            <input name="username" id="username" placeholder="Username" type="text"/>
-        </div>
-        <div>
-            <input name="password" id="password" placeholder="Password" type="text"/>
-        </div>
-        <div>
+    <div class="login-form">
+        <h1>Login</h1>
+        <form action="/login/auth" method="POST">
+            <div class="username">
+                <input name="username" id="username" placeholder="Username" type="text" required/>
+            </div>
+            <div class="password">
+                <input name="password" id="password" placeholder="Password" type="password" required/>
+            </div>
             <button type="submit">Submit</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </body>
 </html>

@@ -5,22 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Login page"/>
     <title>Create Account</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Create new account</h1>
-    <form action="/signup" method="POST">
-        <div>
-            <input name="username" id="username" placeholder="Username">
-        </div>
-        <div>
-            <input name="password" id="password" placeholder="Password">
-        </div>
-        <div>
-            <input name="confirmPassword" id="confirmPassword" placeholder="Confirm Password">
-        </div>
-        <div>
-            <button>Submit</button>
-        </div>
-    </form>
+    <div class="login-form">
+        <h1>Create new account</h1>
+        <form action="/signup" method="POST">
+            <div name = "username">
+                <input name="username" id="username" placeholder="Username" type="text">
+            </div>
+            <div name = "password">
+                <input name="password" id="password" placeholder="Password" type="password">
+            </div>
+            <div>
+                <input name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" type="password">
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
