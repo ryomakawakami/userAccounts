@@ -1,7 +1,11 @@
 const express = require('express');
+const fs = require('fs');
+const readline = require('readline');
 const bodyParser = require('body-parser');
 const path = require('path');
+const myParser = require('./userParser.js');
 const app = express();
+
 
 const port = 3000;
 
@@ -19,4 +23,25 @@ app.get('/signup', (req, res)=>{
 
 app.post('/login/auth', (req, res) => {
     res.send(`User: ${req.body.username} Pass: ${req.body.password}`);
-})
+});
+
+app.post('/signup/createNew', (req, res)=>{
+    
+    // isValid = true;
+    
+    // if(req.body.password == req.body.confirmPassword){
+    //     readInterface = readline.createInterface({
+    //         input : fs.createReadStream('./plaintext/accounts'),
+    //         output: process.stdout,
+    //         console: false
+    //     });
+
+    //     readInterface.on('line', (line)=>{
+    //         res.send("Happy");
+    //         info = myParser.parse(line);
+    //         console.log(info);
+    //     });
+    // }
+    
+
+});
