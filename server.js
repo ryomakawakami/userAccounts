@@ -3,14 +3,14 @@ const fs = require('fs');
 const readline = require('readline');
 const bodyParser = require('body-parser');
 const path = require('path');
-const myParser = require('./userParser.js');
+var spawn = require('child_process').spawn;
+
+
 const app = express();
-
-
 const port = 3000;
 
 app.listen(port, () => console.log('Listening at port ' + port));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/login', (req, res)=>{
@@ -27,19 +27,25 @@ app.post('/login/auth', (req, res) => {
 
 app.post('/signup/createNew', (req, res)=>{
     
-    isValid = true;
-    
-    if(req.body.password == req.body.confirmPassword){
-        readInterface = readline.createInterface({
-            input : fs.createReadStream('./plaintext/accounts'),
-            output: process.stdout,
-            console: false
-        });
+    createAccount = spawn('python', ['createAccount.py', req.body.username, req.body.password]);
 
-        readInterface.on('line', (line)=>{
-            console.log(line);
-        });
-    }
-    
+    createAccount.stdout.on('data', (data)=>{
+        console.log(data.toString());
+        if(data.toString() == "True\n"){
+            fs.appendFile("plaintext/accounts", req.body.username+" "+req.body.password+"\n", (err)=>{
+                if(err){
+                    res.send(err);
+                }else{
+
+                    res.send("Your account has been added, "+req.body.username+"! Welcome!");
+                }
+            });
+        }else if(data.toString() == "False\n"){
+            res.send("Invalid credentials");
+        }
+    });
+    createAccount.on('close', ()=>{
+        console.log("Python process: createAccount.py over");
+    });
 
 });
