@@ -10,7 +10,7 @@ const app = express();
 const port = 3000;
 
 app.listen(port, () => console.log('Listening at port ' + port));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/login', (req, res)=>{
@@ -27,7 +27,7 @@ app.post('/login/auth', (req, res) => {
 
 app.post('/signup/createNew', (req, res)=>{
     
-    createAccount = spawn('python', ['createAccount.py', req.body.username, req.body.password]);
+    createAccount = spawn('python', [path.join(__dirname, 'pyAuth', 'createAccount.py'), req.body.username, req.body.password]);
 
     createAccount.stdout.on('data', (data)=>{
         console.log(data.toString());
@@ -41,7 +41,7 @@ app.post('/signup/createNew', (req, res)=>{
                 }
             });
         }else if(data.toString() == "False\n"){
-            res.send("Invalid credentials");
+            res.send("Username or password already in use.");
         }
     });
     createAccount.on('close', ()=>{

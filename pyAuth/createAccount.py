@@ -4,7 +4,7 @@ import userParser
 
 def validateInfo(info):
     toRet = True
-    accounts = open("../plaintext/accounts", 'r')
+    accounts = open("plaintext/accounts", 'r')
     lines = accounts.readlines()
     for line in lines:
         line = line.strip()
