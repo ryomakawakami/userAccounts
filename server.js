@@ -31,16 +31,15 @@ app.post('/signup/createNew', (req, res)=>{
 
     createAccount.stdout.on('data', (data)=>{
         console.log(data.toString());
-        if(data.toString() == "True\n"){
+        if(data.toString().startsWith("True")){
             fs.appendFile("plaintext/accounts", req.body.username+" "+req.body.password+"\n", (err)=>{
                 if(err){
                     res.send(err);
                 }else{
-
                     res.send("Your account has been added, "+req.body.username+"! Welcome!");
                 }
             });
-        }else if(data.toString() == "False\n"){
+        }else if(data.toString().startsWith("False")){
             res.send("Username or password already in use.");
         }
     });
