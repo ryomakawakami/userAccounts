@@ -21,7 +21,26 @@ app.get('/signup', (req, res)=>{
 });
 
 app.post('/login/auth', (req, res) => {
-    res.send(`User: ${req.body.username} Pass: ${req.body.password}`);
+    authorize = spawn('python', [path.join(__dirname, 'pyAuth', 'authorize.py'),
+        req.body.username, req.body.password]);
+
+    authorize.stdout.on('data', (data) => {
+        console.log(data.toString());
+        switch(parseInt(data.toString())) {
+            case 0:
+                res.send("Welcome, " + req.body.username + "!");
+                break;
+            case 1:
+                res.send("Incorrect username or password.");
+                break;
+            default:
+                res.send("Unknown error.");
+        }
+    })
+
+    authorize.on('close', ()=>{
+        console.log("Python process: authorize.py over");
+    });
 });
 
 app.post('/signup/createNew', (req, res)=>{
