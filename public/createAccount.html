@@ -12,13 +12,13 @@
         <h1>Create new account</h1>
         <form action="/signup/createnew" method="POST">
             <div name = "username">
-                <input name="username" id="username" placeholder="Username" type="text">
+                <input name="username" id="username" placeholder="Username" type="text" required>
             </div>
             <div name = "password">
-                <input name="password" id="password" placeholder="Password" type="password">
+                <input name="password" id="password" placeholder="Password" type="password" required>
             </div>
             <div>
-                <input name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" type="password">
+                <input name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" type="password" required>
             </div>
             <div>
                 <button>Submit</button>
