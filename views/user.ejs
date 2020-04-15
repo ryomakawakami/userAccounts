@@ -9,12 +9,18 @@
 </head>
 <body>
     <h1>Spectacle Squad</h1>
-    <p>
     <% if (!auth) { %>
-        Not logged in.
+        <p>
+            Not logged in.
+        </p>
     <% } else { %>
-        Hello, <%= user %>!
+        <p>
+            Hello, <%= user %>!
+
+            <form action="/logout" method="POST">
+                <button type="submit">Logout</button>
+            </form>
+        </p>
     <% } %>
-    </p>
 </body>
 </html>

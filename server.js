@@ -96,3 +96,9 @@ app.get('/user', (req, res) => {
         user: req.session.user
     });
 })
+
+app.post('/logout', (req, res) => {
+    req.session.auth = false;
+    req.session.user = null;
+    res.redirect('/');
+})
