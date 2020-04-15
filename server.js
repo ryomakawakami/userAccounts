@@ -4,20 +4,27 @@ const readline = require('readline');
 const bodyParser = require('body-parser');
 const path = require('path');
 var spawn = require('child_process').spawn;
+const session = require('express-session');
 
 const app = express();
 const port = 3000;
 
 app.listen(port, () => console.log('Listening at port ' + port));
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'views')));
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({
+    secret: "Shh, its a secret!",
+    resave: false,
+    saveUninitialized: false
+}));
+app.set('view engine', 'ejs');
 
 app.get('/login', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'public', 'loginForm.html'));
+    res.sendFile(path.join(__dirname, 'views', 'loginForm.html'));
 });
 
 app.get('/signup', (req, res)=>{
-    res.sendFile(path.join(__dirname, 'public', 'createAccount.html'));
+    res.sendFile(path.join(__dirname, 'views', 'createAccount.html'));
 });
 
 app.post('/login/auth', (req, res) => {
@@ -28,7 +35,9 @@ app.post('/login/auth', (req, res) => {
         console.log(data.toString());
         switch(parseInt(data.toString())) {
             case 0:
-                res.send("Welcome, " + req.body.username + "!");
+                req.session.user = req.body.username;
+                req.session.auth = true;
+                res.redirect('/user');
                 break;
             case 1:
                 res.send("Incorrect username or password.");
@@ -80,3 +89,10 @@ app.post('/signup/createNew', (req, res)=>{
     });
 
 });
+
+app.get('/user', (req, res) => {
+    res.render('user', {
+        auth: req.session.auth,
+        user: req.session.user
+    });
+})
