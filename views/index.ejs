@@ -9,6 +9,16 @@
 </head>
 <body>
     <h1>Spectacle Squad</h1>
-    <p1><a href = "login">Login</a> or <a href ="signup">Create Account</a></p1>
+    <% if (!auth) { %>
+        <p1><a href = "login">Login</a> or <a href ="signup">Create Account</a></p1>
+    <% } else { %>
+        <p>
+            Logged in as <%= user %>
+        </p>
+
+        <form action="/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    <% } %>
 </body>
 </html>

@@ -19,6 +19,13 @@ app.use(session({
 }));
 app.set('view engine', 'ejs');
 
+app.get('/', (req, res) => {
+    res.render('index', {
+        auth: req.session.auth,
+        user: req.session.user
+    });
+});
+
 app.get('/login', (req, res)=>{
     res.sendFile(path.join(__dirname, 'views', 'loginForm.html'));
 });
@@ -95,10 +102,10 @@ app.get('/user', (req, res) => {
         auth: req.session.auth,
         user: req.session.user
     });
-})
+});
 
 app.post('/logout', (req, res) => {
     req.session.auth = false;
     req.session.user = null;
     res.redirect('/');
-})
+});
