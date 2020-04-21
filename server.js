@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const readline = require('readline');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -67,13 +66,7 @@ app.post('/signup/createNew', (req, res)=>{
         console.log(data.toString());
         switch(parseInt(data.toString())) {
             case 0:
-                fs.appendFile("admin/accounts", req.body.username+" "+req.body.password+"\n", (err)=>{
-                    if(err){
-                        res.send(err);
-                    }else{
-                        res.send("Your account has been added, "+req.body.username+"! Welcome!");
-                    }
-                });
+                res.send("Your account has been added, "+req.body.username+"! Welcome!");
                 break;
             case 1:
                 res.send("Username already in use.");

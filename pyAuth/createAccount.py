@@ -1,4 +1,5 @@
 import sys
+import hasher
 
 def validateInfo(u, p):
     with open("admin/accounts", 'r') as f:
@@ -6,6 +7,9 @@ def validateInfo(u, p):
             account = line.strip().split(' ')
             if(u == account[0]):
                 return 1
+        s, h = hasher.newHash(p)
+    with open("admin/accounts", 'a') as f:
+        f.write(u + " " + s + " " + h + "\n")
     return 0
 
 # Get user input
