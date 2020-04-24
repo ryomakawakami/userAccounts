@@ -6,4 +6,4 @@ with open('admin/backup', 'r') as f:
         for line in f:
             u, p = line.strip().split(' ')
             s, h = hasher.newHash(p)
-            fo.write(u + " " + s + " " + h + "\n")
+            fo.write(u + ' ' + s + ' ' + h + '\n')

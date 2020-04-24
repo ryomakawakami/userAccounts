@@ -15,7 +15,7 @@ def checkPassword(username, password):
 # Get user input
 username, password = sys.argv[1:]
 
-if username == "" or password == "":
+if username == '' or password == '':
     print(1)
     sys.exit()
 

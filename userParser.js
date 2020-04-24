@@ -6,7 +6,7 @@ let parse = (userInfo)=>{
     var password;
     let i = 1;
     for(character of userInfo){
-        if(character == " "){
+        if(character == ' '){
             username = userInfo.substring(0, i);
             break;
         }
@@ -26,7 +26,7 @@ let validateInfo = (username, password)=>{
     });
 
     readInterface.on('line', (line)=>{
-        if(line == "null"){
+        if(line == 'null'){
             readInterface.close();
         }else{
             let info = parse(line);
@@ -39,12 +39,10 @@ let validateInfo = (username, password)=>{
         }
     });
     readInterface.on('close', ()=>{
-        console.log("reader closed");
+        console.log('reader closed');
         console.log(isValid);
         return isValid;
     });
-    
-    
 
 }
 

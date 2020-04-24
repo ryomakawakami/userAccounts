@@ -12,7 +12,7 @@ app.listen(port, () => console.log('Listening at port ' + port));
 app.use('/', express.static(path.join(__dirname, 'views')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({
-    secret: "Shh, its a secret!",
+    secret: 'Shh, its a secret!',
     resave: false,
     saveUninitialized: false
 }));
@@ -46,15 +46,15 @@ app.post('/login/auth', (req, res) => {
                 res.redirect('/user');
                 break;
             case 1:
-                res.send("Incorrect username or password.");
+                res.send('Incorrect username or password.');
                 break;
             default:
-                res.send("Unknown error.");
+                res.send('Unknown error.');
         }
     })
 
     authorize.on('close', ()=>{
-        console.log("Python process: authorize.py over");
+        console.log('Python process: authorize.py over');
     });
 });
 
@@ -66,26 +66,26 @@ app.post('/signup/createNew', (req, res)=>{
         console.log(data.toString());
         switch(parseInt(data.toString())) {
             case 0:
-                res.send("Your account has been added, "+req.body.username+"! Welcome!");
+                res.send('Your account has been added, '+req.body.username+'! Welcome!');
                 break;
             case 1:
-                res.send("Username already in use.");
+                res.send('Username already in use.');
                 break;
             case 2:
-                res.send("Username cannot be empty.");
+                res.send('Username cannot be empty.');
                 break;
             case 3:
-                res.send("Password cannot be empty.");
+                res.send('Password cannot be empty.');
                 break;
             case 4:
-                res.send("Passwords don't match.");
+                res.send('Passwords don't match.');
                 break;
             default:
-                res.send("Unknown error.");
+                res.send('Unknown error.');
         }
     });
     createAccount.on('close', ()=>{
-        console.log("Python process: createAccount.py over");
+        console.log('Python process: createAccount.py over');
     });
 
 });
