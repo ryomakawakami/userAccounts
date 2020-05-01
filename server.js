@@ -78,7 +78,7 @@ app.post('/signup/createNew', (req, res)=>{
                 res.send('Password cannot be empty.');
                 break;
             case 4:
-                res.send('Passwords don't match.');
+                res.send('Passwords don\'t match.');
                 break;
             default:
                 res.send('Unknown error.');
